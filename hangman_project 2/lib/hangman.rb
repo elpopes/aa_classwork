@@ -74,7 +74,7 @@ class Hangman
   def win?
     
     if @guess_word.join("") == @secret_word
-      print "WIN"
+      puts "WIN"
       return true
     else
       return false
@@ -84,7 +84,7 @@ class Hangman
 
   def lose?
     if @remaining_incorrect_guesses == 0
-      print "LOSE"
+      puts "LOSE"
       return true
     else
       return false
@@ -93,7 +93,7 @@ class Hangman
 
   def game_over?
     if win?() || lose?()
-      print @secret_word
+      puts @secret_word
       return true
     else
       return false
