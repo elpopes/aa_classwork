@@ -1,3 +1,5 @@
+require "byebug"
+
 class Hangman
   DICTIONARY = ["cat", "dog", "bootcamp", "pizza"]
   
@@ -49,10 +51,9 @@ class Hangman
     end
     guess_word
   end
-require "byebug"
+
   def try_guess(char)
     fill_indices(char, get_matching_indices(char))
-    # debugger
    
     if already_attempted?(char)
       puts "that has already been attempted"
@@ -62,9 +63,41 @@ require "byebug"
       attempted_chars << char
       return true
     end
+  end
+
+  def ask_user_for_guess
+    puts "Enter a char"
+    char = gets.chomp
+    try_guess(char)
+  end 
+
+  def win?
     
+    if @guess_word.join("") == @secret_word
+      print "WIN"
+      return true
+    else
+      return false
+    end
+    
+  end 
 
+  def lose?
+    if @remaining_incorrect_guesses == 0
+      print "LOSE"
+      return true
+    else
+      return false
+    end
+  end
 
+  def game_over?
+    if win?() || lose?()
+      print @secret_word
+      return true
+    else
+      return false
+    end
   end
 
 end
