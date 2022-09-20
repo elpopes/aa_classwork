@@ -36,6 +36,8 @@ class Hangman
     secret_word.each_with_index do |letter,i|
       if letter == char
         new_array << i
+      # else
+      #   remaining_incorrect_guesses -= 1
       end
     end
     new_array
@@ -46,6 +48,23 @@ class Hangman
       guess_word[i] = char
     end
     guess_word
+  end
+require "byebug"
+  def try_guess(char)
+    fill_indices(char, get_matching_indices(char))
+    # debugger
+   
+    if already_attempted?(char)
+      puts "that has already been attempted"
+      return false
+    else 
+      @remaining_incorrect_guesses -= 1 if !(@secret_word.include?(char))
+      attempted_chars << char
+      return true
+    end
+    
+
+
   end
 
 end
