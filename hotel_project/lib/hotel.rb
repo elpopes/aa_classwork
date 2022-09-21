@@ -13,7 +13,6 @@ class Hotel
     end
 
     def name
-        # debugger
         (@name.split(" ").map {|n| n.capitalize}).join(" ")
     end
 
@@ -28,7 +27,19 @@ class Hotel
     def check_in(person, room)
         if !room_exists?(room)
             puts "sorry, room does not exist"
-            
+        elsif @rooms[room].add_occupant(name)  
+            puts "check in successful"
+          else puts "sorry, room is full"
+        end
     end
 
+    def has_vacancy?
+        rooms.values.any? { |room| room.available_space > 0}
+    end
+    
+    def list_rooms
+        @rooms.each do |room, beds|
+        puts "#{room}      #{beds.available_space}"
+        end
+    end
 end
